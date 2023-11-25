@@ -23,7 +23,7 @@
             </div>
             <div class="row justify-content-center gap-1">
                 <a @click="$router.back()" class="col-6 btn btn-lg btn-outline-info mb-3" type="button">Назад</a>
-                <button type="button" class="col-6 btn btn-lg btn-primary mb-3">Оформить заказ</button>
+                <button @click="confirmOrder()" type="button" class="col-6 btn btn-lg btn-primary mb-3">Оформить заказ</button>
     
             </div>
         </main>
@@ -36,7 +36,6 @@ export default {
   data(){
     return {
         name: 'CartPage',
-        cart: [],
         token: null
     }
   },
@@ -49,11 +48,15 @@ export default {
     ...mapActions([
             'GET_CART_FROM_API', 
             'ADD_PRODUCT_TO_CART',
-            'DELETE_PRODUCT_FROM_CART'
+            'DELETE_PRODUCT_FROM_CART',
+            'CONFIRM_ORDER'
         ]),
     addItem(id){
         this.ADD_PRODUCT_TO_CART(id),
         this.GET_CART_FROM_API()
+    },
+    confirmOrder(){
+        this.CONFIRM_ORDER(this.CART)
     },
     deleteItem(id){
         this.DELETE_PRODUCT_FROM_CART(id),

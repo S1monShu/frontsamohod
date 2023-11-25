@@ -113,6 +113,17 @@ export default createStore({
         return error;
       })
     },
+    CONFIRM_ORDER({commit}, credentials){
+      return axios
+        .post(`http://127.0.0.1:8000/api-samohod/order/`, credentials)
+        .then( response => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        })
+    },
     GET_ORDERS_FROM_API({commit}){
       return axios
         .get(`http://127.0.0.1:8000/api-samohod/order/`)
